@@ -47,7 +47,7 @@ class Student
     student
   end
   
-  def self.new_from_db(row)
+  def self.new_from_db(array)
     new_student = self.new
     new_student.id = row[0]
     new_student.name = row[1]
@@ -55,7 +55,7 @@ class Student
   end
   
   def self.find_by_name(name)
-    sql = "SELECT * FROM students WHERE name = ? LIMIT 1"
+    sql = "SELECT * FROM students WHERE name = ?"
     result = DB[:conn].execute(sql, name)
   end
   
