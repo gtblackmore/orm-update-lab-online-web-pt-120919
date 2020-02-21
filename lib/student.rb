@@ -17,14 +17,14 @@ class Student
         name TEXT,
         grade INTEGER
         )
-        SQL
-      DB[:conn].execute(sql)
+    SQL
+    DB[:conn].execute(sql)
   end
   
   def self.drop_table
     sql = <<-SQL
       DROP TABLE IF EXISTS students
-      SQL
+    SQL
     DB[:conn].execute(sql)
   end
   
@@ -36,9 +36,8 @@ class Student
         INSERT INTO students(name, grade)
         VALUES (?, ?)
       SQL
-      DB[:conn].execute(sql)
-  
-     @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
+      DB[:conn].execute(sql, self.name, self.album)
+      @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
   end
   
   def self.create
