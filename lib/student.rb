@@ -2,9 +2,6 @@ require_relative "../config/environment.rb"
 
 class Student
 
-  # Remember, you can access your database connection anywhere in this class
-  #  with DB[:conn]  
-  
   attr_accessor :name, :grade, :id
   
   def initialize(id=nil, name, grade)
@@ -37,9 +34,7 @@ class Student
         INSERT INTO students (name, grade) 
         VALUES (?, ?)
       SQL
-
       DB[:conn].execute(sql, self.name, self.grade)
-
       @id = DB[:conn].execute("SELECT last_insert_rowid() FROM students")[0][0]
     end
     
@@ -68,5 +63,4 @@ class Student
     sql = "UPDATE students SET name = ?, grade = ? WHERE id = ?"
     DB[:conn].execute(sql, self.name, self.grade, self.id)
   end
-
 end
